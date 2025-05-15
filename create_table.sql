@@ -79,3 +79,16 @@ CREATE TABLE prompt (
     content TEXT NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE assessment(
+    id INT AUTO_INCREMENT,
+    created_at TIMESTAMP NOT NULL,
+    total_score INT NOT NULL,
+    dataset_id INT NOT NULL,
+    model_id INT NOT NULL,
+    referee_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (dataset_id) REFERENCES dataset(id),
+    FOREIGN KEY (model_id) REFERENCES model(id),
+    FOREIGN KEY (referee_id) REFERENCES model(id)
+);
