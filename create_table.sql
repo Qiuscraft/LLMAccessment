@@ -105,7 +105,7 @@ CREATE TABLE model_answer(
 );
 
 CREATE TABLE model_answer_assessment (
-    id INT NOT NULL,
+    id INT AUTO_INCREMENT,
     total_score INT NOT NULL,
     assessment_id INT NOT NULL,
     model_answer_id INT NOT NULL,
