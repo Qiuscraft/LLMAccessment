@@ -15,7 +15,8 @@ CREATE TABLE standard_question (
 CREATE TABLE standard_question_tag (
     tag VARCHAR(63) NOT NULL,
     sq_id INT NOT NULL,
-    PRIMARY KEY (tag, sq_id)
+    PRIMARY KEY (tag, sq_id),
+    FOREIGN KEY (sq_id) REFERENCES standard_question(id)
 );
 
 CREATE TABLE standard_answer (
