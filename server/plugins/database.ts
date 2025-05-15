@@ -1,17 +1,15 @@
 import mysql from 'mysql2/promise';
 import fs from 'fs';
 import path from 'path';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 export default async () => {
   try {
+    const runtimeConfig = useRuntimeConfig();
     const connection = await mysql.createConnection({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
+      host: runtimeConfig.sql.host,
+      user: runtimeConfig.sql.user,
+      password: runtimeConfig.sql.password,
+      database: runtimeConfig.sql.database,
     });
 
     try {
