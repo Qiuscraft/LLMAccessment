@@ -54,7 +54,9 @@ CREATE TABLE dataset (
 CREATE TABLE dataset_questions (
     ds_id INT NOT NULL,
     sq_id INT NOT NULL,
-    PRIMARY KEY (ds_id, sq_id)
+    PRIMARY KEY (ds_id, sq_id),
+    FOREIGN KEY (ds_id) REFERENCES dataset(id),
+    FOREIGN KEY (sq_id) REFERENCES standard_question(id)
 );
 
 CREATE TABLE dataset_version_update (
