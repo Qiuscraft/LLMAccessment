@@ -59,12 +59,12 @@ CREATE TABLE dataset_questions (
     FOREIGN KEY (sq_id) REFERENCES standard_question(id)
 );
 
-CREATE TABLE dataset_version_update (
-    prev_version_id INT NOT NULL,
-    next_version_id INT NOT NULL,
-    PRIMARY KEY (prev_version_id, next_version_id),
-    FOREIGN KEY (prev_version_id) REFERENCES dataset(id),
-    FOREIGN KEY (next_version_id) REFERENCES dataset(id)
+CREATE TABLE dataset_version (
+    prev_id INT NOT NULL,
+    next_id INT NOT NULL,
+    PRIMARY KEY (prev_id, next_id),
+    FOREIGN KEY (prev_id) REFERENCES dataset(id),
+    FOREIGN KEY (next_id) REFERENCES dataset(id)
 );
 
 CREATE TABLE prompt (
