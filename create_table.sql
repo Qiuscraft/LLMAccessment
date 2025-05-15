@@ -1,10 +1,10 @@
-CREATE TABLE original_question (
+CREATE TABLE IF NOT EXISTS original_question (
     id INT AUTO_INCREMENT,
     content TEXT NOT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE standard_question (
+CREATE TABLE IF NOT EXISTS standard_question (
     id INT AUTO_INCREMENT,
     content TEXT NOT NULL,
     oq_id INT NOT NULL,
@@ -12,21 +12,21 @@ CREATE TABLE standard_question (
     FOREIGN KEY (oq_id) REFERENCES original_question(id)
 );
 
-CREATE TABLE standard_question_tag (
+CREATE TABLE IF NOT EXISTS standard_question_tag (
     tag VARCHAR(63) NOT NULL,
     sq_id INT NOT NULL,
     PRIMARY KEY (tag, sq_id),
     FOREIGN KEY (sq_id) REFERENCES standard_question(id)
 );
 
-CREATE TABLE standard_answer (
+CREATE TABLE IF NOT EXISTS standard_answer (
     id INT AUTO_INCREMENT,
     sq_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (sq_id) REFERENCES standard_question(id)
 );
 
-CREATE TABLE standard_answer_scorepoint (
+CREATE TABLE IF NOT EXISTS standard_answer_scorepoint (
     id INT AUTO_INCREMENT,
     scorepoint TEXT NOT NULL,
     score DECIMAL(5, 2) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE standard_answer_scorepoint (
     FOREIGN KEY (sa_id) REFERENCES standard_answer(id)
 );
 
-CREATE TABLE candidate_answer (
+CREATE TABLE IF NOT EXISTS candidate_answer (
     id INT AUTO_INCREMENT,
     sq_id INT NOT NULL,
     username VARCHAR(63) NOT NULL,
@@ -44,14 +44,14 @@ CREATE TABLE candidate_answer (
     FOREIGN KEY (sq_id) REFERENCES standard_question(id)
 );
 
-CREATE TABLE dataset (
+CREATE TABLE IF NOT EXISTS dataset (
     id INT AUTO_INCREMENT,
     name VARCHAR(63) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE dataset_questions (
+CREATE TABLE IF NOT EXISTS dataset_questions (
     ds_id INT NOT NULL,
     sq_id INT NOT NULL,
     PRIMARY KEY (ds_id, sq_id),
@@ -59,7 +59,7 @@ CREATE TABLE dataset_questions (
     FOREIGN KEY (sq_id) REFERENCES standard_question(id)
 );
 
-CREATE TABLE dataset_version (
+CREATE TABLE IF NOT EXISTS dataset_version (
     prev_id INT NOT NULL,
     next_id INT NOT NULL,
     PRIMARY KEY (prev_id, next_id),
@@ -67,12 +67,12 @@ CREATE TABLE dataset_version (
     FOREIGN KEY (next_id) REFERENCES dataset(id)
 );
 
-CREATE TABLE model_type (
+CREATE TABLE IF NOT EXISTS model_type (
     type VARCHAR(63) NOT NULL,
     PRIMARY KEY (type)
 );
 
-CREATE TABLE prompt (
+CREATE TABLE IF NOT EXISTS prompt (
     id INT AUTO_INCREMENT,
     type VARCHAR(63) NOT NULL,
     content TEXT NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE prompt (
     FOREIGN KEY (type) REFERENCES model_type(type)
 );
 
-CREATE TABLE model (
+CREATE TABLE IF NOT EXISTS model (
     id INT AUTO_INCREMENT,
     type VARCHAR(63) NOT NULL,
     name VARCHAR(63) NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE model (
     FOREIGN KEY (type) REFERENCES model_type(type)
 );
 
-CREATE TABLE assessment(
+CREATE TABLE IF NOT EXISTS assessment (
     id INT AUTO_INCREMENT,
     created_at TIMESTAMP NOT NULL,
     total_score DECIMAL(5, 2) NOT NULL,
@@ -103,7 +103,7 @@ CREATE TABLE assessment(
     FOREIGN KEY (referee_id) REFERENCES model(id)
 );
 
-CREATE TABLE model_answer(
+CREATE TABLE IF NOT EXISTS model_answer(
     id INT AUTO_INCREMENT,
     model_id INT NOT NULL,
     sq_id INT NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE model_answer(
     FOREIGN KEY (sq_id) REFERENCES standard_question(id)
 );
 
-CREATE TABLE model_answer_assessment (
+CREATE TABLE IF NOT EXISTS model_answer_assessment (
     id INT AUTO_INCREMENT,
     total_score DECIMAL(5, 2) NOT NULL,
     assessment_id INT NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE model_answer_assessment (
     FOREIGN KEY (model_answer_id) REFERENCES model_answer(id)
 );
 
-CREATE TABLE model_answer_assess_process (
+CREATE TABLE IF NOT EXISTS model_answer_assess_process (
     model_answer_assessment_id INT NOT NULL,
     scorepoint_id INT NOT NULL,
     score DECIMAL(5, 2) NOT NULL,
