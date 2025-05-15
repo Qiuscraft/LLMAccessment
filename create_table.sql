@@ -69,7 +69,7 @@ CREATE TABLE dataset_version (
 
 CREATE TABLE model_type (
     type VARCHAR(63) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (type)
 );
 
 CREATE TABLE prompt (
