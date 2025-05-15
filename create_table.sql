@@ -29,7 +29,7 @@ CREATE TABLE standard_answer (
 CREATE TABLE standard_answer_scorepoint (
     id INT AUTO_INCREMENT,
     scorepoint TEXT NOT NULL,
-    score INT NOT NULL,
+    score DECIMAL(5, 2) NOT NULL,
     sa_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (sa_id) REFERENCES standard_answer(id)
@@ -84,7 +84,7 @@ CREATE TABLE prompt (
 CREATE TABLE assessment(
     id INT AUTO_INCREMENT,
     created_at TIMESTAMP NOT NULL,
-    total_score INT NOT NULL,
+    total_score DECIMAL(5, 2) NOT NULL,
     dataset_id INT NOT NULL,
     model_id INT NOT NULL,
     referee_id INT NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE model_answer(
 
 CREATE TABLE model_answer_assessment (
     id INT AUTO_INCREMENT,
-    total_score INT NOT NULL,
+    total_score DECIMAL(5, 2) NOT NULL,
     assessment_id INT NOT NULL,
     model_answer_id INT NOT NULL,
     PRIMARY KEY (id),
@@ -117,7 +117,7 @@ CREATE TABLE model_answer_assessment (
 CREATE TABLE model_answer_assess_process (
     model_answer_assessment_id INT NOT NULL,
     scorepoint_id INT NOT NULL,
-    score INT NOT NULL,
+    score DECIMAL(5, 2) NOT NULL,
     PRIMARY KEY (model_answer_assessment_id, scorepoint_id),
     FOREIGN KEY (model_answer_assessment_id) REFERENCES model_answer_assessment(id),
     FOREIGN KEY (scorepoint_id) REFERENCES standard_answer_scorepoint(id)
