@@ -69,7 +69,6 @@ export default defineNuxtConfig({
       routes: ['/'],
       ignore: ['/hi'],
     },
-    plugins: ['~/server/plugins/database'],
   },
 
   vite: {
