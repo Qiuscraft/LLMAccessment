@@ -46,9 +46,8 @@ CREATE TABLE candidate_answer (
 CREATE TABLE dataset (
     id INT AUTO_INCREMENT,
     name VARCHAR(63) NOT NULL,
-    version_id INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (version_id) REFERENCES dataset_version(id)
+    created_at TIMESTAMP NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE dataset_questions (
@@ -57,19 +56,12 @@ CREATE TABLE dataset_questions (
     PRIMARY KEY (ds_id, sq_id)
 );
 
-CREATE TABLE dataset_version (
-    id INT AUTO_INCREMENT,
-    name VARCHAR(63) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE dataset_version_update (
     prev_version_id INT NOT NULL,
     next_version_id INT NOT NULL,
     PRIMARY KEY (prev_version_id, next_version_id),
-    FOREIGN KEY (prev_version_id) REFERENCES dataset_version(id),
-    FOREIGN KEY (next_version_id) REFERENCES dataset_version(id)
+    FOREIGN KEY (prev_version_id) REFERENCES dataset(id),
+    FOREIGN KEY (next_version_id) REFERENCES dataset(id)
 );
 
 CREATE TABLE model (
