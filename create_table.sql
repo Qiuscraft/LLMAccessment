@@ -65,6 +65,13 @@ CREATE TABLE dataset_version_update (
     FOREIGN KEY (next_version_id) REFERENCES dataset(id)
 );
 
+CREATE TABLE prompt (
+    id INT AUTO_INCREMENT,
+    type VARCHAR(63) NOT NULL,
+    content TEXT NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE model (
     id INT AUTO_INCREMENT,
     type VARCHAR(63) NOT NULL,
@@ -72,13 +79,6 @@ CREATE TABLE model (
     prompt_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (prompt_id) REFERENCES prompt(id)
-);
-
-CREATE TABLE prompt (
-    id INT AUTO_INCREMENT,
-    type VARCHAR(63) NOT NULL,
-    content TEXT NOT NULL,
-    PRIMARY KEY (id)
 );
 
 CREATE TABLE assessment(
