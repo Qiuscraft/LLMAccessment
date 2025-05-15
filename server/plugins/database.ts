@@ -16,7 +16,7 @@ export default async () => {
 
     try {
       // 读取并执行 SQL 文件
-      const sqlFilePath = path.resolve(__dirname, 'create_table.sql');
+      const sqlFilePath = path.resolve(process.cwd(), 'create_table.sql');
       const sql = fs.readFileSync(sqlFilePath, 'utf-8');
       await connection.query(sql);
     } catch (error) {
