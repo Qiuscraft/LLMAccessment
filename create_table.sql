@@ -92,3 +92,11 @@ CREATE TABLE assessment(
     FOREIGN KEY (model_id) REFERENCES model(id),
     FOREIGN KEY (referee_id) REFERENCES model(id)
 );
+
+CREATE TABLE model_answer(
+    id INT AUTO_INCREMENT,
+    model_id INT NOT NULL,
+    content TEXT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (model_id) REFERENCES model(id)
+);
