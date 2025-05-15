@@ -112,3 +112,12 @@ CREATE TABLE model_answer_assessment (
     FOREIGN KEY (assessment_id) REFERENCES assessment(id),
     FOREIGN KEY (model_answer_id) REFERENCES model_answer(id)
 );
+
+CREATE TABLE model_answer_assess_process (
+    model_answer_assessment_id INT NOT NULL,
+    scorepoint_id INT NOT NULL,
+    score INT NOT NULL,
+    PRIMARY KEY (model_answer_assessment_id, scorepoint_id),
+    FOREIGN KEY (model_answer_assessment_id) REFERENCES model_answer_assessment(id),
+    FOREIGN KEY (scorepoint_id) REFERENCES standard_answer_scorepoint(id)
+);
