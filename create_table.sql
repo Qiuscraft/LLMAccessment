@@ -107,6 +107,8 @@ CREATE TABLE model_answer_assessment (
     id INT NOT NULL,
     total_score INT NOT NULL,
     assessment_id INT NOT NULL,
+    model_answer_id INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (assessment_id) REFERENCES assessment(id)
+    FOREIGN KEY (assessment_id) REFERENCES assessment(id),
+    FOREIGN KEY (model_answer_id) REFERENCES model_answer(id)
 );
