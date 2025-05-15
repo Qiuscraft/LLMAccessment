@@ -2,7 +2,8 @@ import mysql from 'mysql2/promise';
 import fs from 'fs';
 import path from 'path';
 
-export default async () => {
+// Nitro 插件：服务启动时初始化数据库表
+export default defineNitroPlugin(async () => {
   try {
     const runtimeConfig = useRuntimeConfig();
     const connection = await mysql.createConnection({
@@ -25,4 +26,4 @@ export default async () => {
   } catch (connectionError) {
     console.error('数据库连接失败:', connectionError);
   }
-};
+});
