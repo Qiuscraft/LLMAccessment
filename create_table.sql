@@ -96,9 +96,11 @@ CREATE TABLE assessment(
 CREATE TABLE model_answer(
     id INT AUTO_INCREMENT,
     model_id INT NOT NULL,
+    sq_id INT NOT NULL,
     content TEXT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (model_id) REFERENCES model(id)
+    FOREIGN KEY (model_id) REFERENCES model(id),
+    FOREIGN KEY (sq_id) REFERENCES standard_question(id)
 );
 
 CREATE TABLE model_answer_assessment (
