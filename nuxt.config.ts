@@ -1,5 +1,14 @@
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    sql: {
+      host: '',
+      user: '',
+      password: '',
+      database: '',
+    }
+  },
+
   modules: [
     '@nuxt/eslint',
     '@vueuse/nuxt',
