@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS llm_assessment_system;
+USE llm_assessment_system;
+
 CREATE TABLE original_question (
     id INT AUTO_INCREMENT,
     content TEXT NOT NULL,
