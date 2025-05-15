@@ -71,3 +71,19 @@ CREATE TABLE dataset_version_update (
     FOREIGN KEY (prev_version_id) REFERENCES dataset_version(id),
     FOREIGN KEY (next_version_id) REFERENCES dataset_version(id)
 );
+
+CREATE TABLE model (
+    id INT AUTO_INCREMENT,
+    type VARCHAR(63) NOT NULL,
+    name VARCHAR(63) NOT NULL,
+    prompt_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (prompt_id) REFERENCES prompt(id)
+);
+
+CREATE TABLE prompt (
+    id INT AUTO_INCREMENT,
+    type VARCHAR(63) NOT NULL,
+    content TEXT NOT NULL,
+    PRIMARY KEY (id)
+);
