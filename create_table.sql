@@ -67,11 +67,17 @@ CREATE TABLE dataset_version (
     FOREIGN KEY (next_id) REFERENCES dataset(id)
 );
 
+CREATE TABLE model_type (
+    type VARCHAR(63) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE prompt (
     id INT AUTO_INCREMENT,
     type VARCHAR(63) NOT NULL,
     content TEXT NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (type) REFERENCES model_type(type)
 );
 
 CREATE TABLE model (
@@ -80,7 +86,8 @@ CREATE TABLE model (
     name VARCHAR(63) NOT NULL,
     prompt_id INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (prompt_id) REFERENCES prompt(id)
+    FOREIGN KEY (prompt_id) REFERENCES prompt(id),
+    FOREIGN KEY (type) REFERENCES model_type(type)
 );
 
 CREATE TABLE assessment(
