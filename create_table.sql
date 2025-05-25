@@ -1,9 +1,24 @@
 CREATE TABLE IF NOT EXISTS original_question (
     id INT AUTO_INCREMENT,
-    content TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    latest_version VARCHAR(255) NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS original_question_version (
+    oq_id INT NOT NULL,
+    version VARCHAR(255) NOT NULL,
+    title VARCHAR(255),
+    content TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (oq_id, version),
+    FOREIGN KEY (oq_id) REFERENCES original_question(id)
+);
+
+/*
 CREATE TABLE IF NOT EXISTS standard_question (
     id INT AUTO_INCREMENT,
     content TEXT NOT NULL,
@@ -131,3 +146,4 @@ CREATE TABLE IF NOT EXISTS model_answer_assess_process (
     FOREIGN KEY (model_answer_assessment_id) REFERENCES model_answer_assessment(id),
     FOREIGN KEY (scorepoint_id) REFERENCES standard_answer_scorepoint(id)
 );
+*/
