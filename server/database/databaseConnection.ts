@@ -39,8 +39,7 @@ export async function withDatabaseConnection<T>(callback: (connection: mysql.Poo
         try {
             const connection = await _getDatabaseConnection();
             try {
-                const result = await callback(connection);
-                return result;
+                return await callback(connection);
             } finally {
                 connection.release();
             }
