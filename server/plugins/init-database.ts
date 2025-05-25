@@ -2,15 +2,16 @@ import mysql from 'mysql2/promise';
 import fs from 'fs';
 import path from 'path';
 
-// Nitro 插件：服务启动时初始化数据库表
 export default defineNitroPlugin(async () => {
   try {
     const runtimeConfig = useRuntimeConfig();
     const connection = await mysql.createConnection({
-      host: runtimeConfig.sql.host,
-      user: runtimeConfig.sql.user,
-      password: runtimeConfig.sql.password,
-      database: runtimeConfig.sql.database,
+      host: runtimeConfig.mysql.host,
+      port: parseInt(runtimeConfig.mysql.port),
+      user: runtimeConfig.mysql.user,
+      password: runtimeConfig.mysql.password,
+      database: runtimeConfig.mysql.database,
+      multipleStatements: true
     });
 
     try {
@@ -18,6 +19,7 @@ export default defineNitroPlugin(async () => {
       const sqlFilePath = path.resolve(process.cwd(), 'create_table.sql');
       const sql = fs.readFileSync(sqlFilePath, 'utf-8');
       await connection.query(sql);
+      console.log('数据库初始化成功');
     } catch (error) {
       console.error('数据库初始化失败:', error);
     } finally {
