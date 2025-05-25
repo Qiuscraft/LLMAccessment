@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS assessment (
     FOREIGN KEY (referee_id) REFERENCES model(id)
 );
 
-CREATE TABLE IF NOT EXISTS model_answer(
+CREATE TABLE IF NOT EXISTS model_answer (
     id INT AUTO_INCREMENT,
     model_id INT NOT NULL,
     sq_id INT NOT NULL,
