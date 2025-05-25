@@ -1,5 +1,5 @@
 <template>
-  <el-button size="large" primary @click="dialogOverflowVisible = true">
+  <el-button primary @click="dialogOverflowVisible = true">
     新建数据
   </el-button>
 
@@ -11,13 +11,13 @@
       overflow
       :before-close="handleClose"
   >
-    <div>问题标题<el-input v-model="title" style="width: 240px; margin-left: 20px" size="large" placeholder="问题标题（可为空）" /></div>
+    <div>问题标题<el-input v-model="title" style="width: 240px; margin-left: 20px" placeholder="问题标题（可为空）" /></div>
     <div>问题描述<el-input v-model="content" style="width: 240px; margin-left: 20px" type="textarea" autosize placeholder="问题描述（必填）" /></div>
-    <div>问题版本<el-input v-model="version" style="width: 240px; margin-left: 20px" size="large" placeholder="问题版本" /></div>
+    <div>问题版本<el-input v-model="version" style="width: 240px; margin-left: 20px" placeholder="问题版本" /></div>
     <template #footer>
       <div class="dialog-footer">
-        <el-button size="large" :disabled="buttonDisabled" @click="handleClose">取消</el-button>
-        <el-button type="primary" size="large" :disabled="buttonDisabled" @click="handleConfirm">
+        <el-button :disabled="buttonDisabled" @click="handleClose">取消</el-button>
+        <el-button type="primary" :disabled="buttonDisabled" @click="handleConfirm">
           确认
         </el-button>
       </div>
