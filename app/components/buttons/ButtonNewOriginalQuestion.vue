@@ -38,7 +38,7 @@ const handleClose = (done: () => void) => {
     })
     .then(() => {
       dialogOverflowVisible.value = false;
-      done && done()
+      done;
     })
     .catch(() => {
       // catch error
@@ -62,7 +62,7 @@ const handleConfirm = async () => {
   }
   buttonDisabled.value = true;
   try {
-    const response = await $fetch('/api/original-question/new', {
+    await $fetch('/api/original-question/new', {
       method: 'POST',
       body: {
         version: version.value,
