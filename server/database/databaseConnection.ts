@@ -32,7 +32,7 @@ async function _getDatabaseConnection(): Promise<mysql.PoolConnection> {
     }
 }
 
-export async function withDatabaseConnection<T>(max_retry: number, retry_delay_ms: number, callback: (connection: mysql.PoolConnection) => Promise<T>): Promise<T> {
+export async function withDatabaseConnection<T>(callback: (connection: mysql.PoolConnection) => Promise<T>, max_retry: number = 5, retry_delay_ms: number = 1000): Promise<T> {
     let retries = 0;
 
     while (true) {
@@ -44,7 +44,7 @@ export async function withDatabaseConnection<T>(max_retry: number, retry_delay_m
             } finally {
                 connection.release();
             }
-        } catch (error: any) {
+        } catch (error) {
             if (error.message === '数据库连接池未初始化。' && retries < max_retry) {
                 console.log(`数据库连接池未初始化，${retry_delay_ms}ms后重试 (${retries + 1}/${max_retry})...`);
                 await new Promise(resolve => setTimeout(resolve, retry_delay_ms));
