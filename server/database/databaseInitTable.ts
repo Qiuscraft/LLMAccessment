@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { withDatabaseConnection } from "~~/server/database/databaseConnection";
 
-export async function initDatabaseTable() {
+export async function databaseInitTable() {
   const sqlFilePath = path.resolve(process.cwd(), 'create_table.sql');
   const sql = fs.readFileSync(sqlFilePath, 'utf-8');
 
