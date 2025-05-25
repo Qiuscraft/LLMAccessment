@@ -3,14 +3,18 @@
 // 原始问题表
 export interface OriginalQuestion {
     id: number;
-    content: string;
+    created_at: Date;
+    updated_at: Date;
+    latest_version: string;
 }
 
-// 标准问题表
-export interface StandardQuestion {
-    id: number;
-    content: string;
+// 原始问题版本表
+export interface OriginalQuestionVersion {
     oq_id: number;
+    version: string;
+    title: string | null;
+    content: string;
+    created_at: Date;
 }
 
 // 标准问题标签表
