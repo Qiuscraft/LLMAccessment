@@ -62,7 +62,7 @@ const handleConfirm = async () => {
   }
   buttonDisabled.value = true;
   try {
-    await $fetch('/api/original-question/new', {
+    await $fetch('/api/original-question', {
       method: 'POST',
       body: {
         version: version.value,
