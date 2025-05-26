@@ -11,7 +11,7 @@ export async function newOriginalQuestion(version: string, title: string | null,
                 [version, false]
             );
 
-            const insertId = result.insertId;
+            const insertId = (result as { insertId: number }).insertId;
             await connection.execute(
                 'INSERT INTO original_question_version (oq_id, version, title, content, deleted) VALUES (?, ?, ?, ?, ?)',
                 [
@@ -66,7 +66,7 @@ export async function getOriginalQuestions(options: GetOriginalQuestionsOptions 
         try {
             // 构建查询条件
             const conditions: string[] = ['oq.deleted = FALSE', 'oqv.deleted = FALSE'];
-            const params: any[] = [];
+            const params: (string | number | Date)[] = [];
 
             // 添加各种筛选条件
             if (options.id !== undefined) {
@@ -139,8 +139,12 @@ export async function getOriginalQuestions(options: GetOriginalQuestionsOptions 
                 ${whereClause}
             `;
 
+            interface CountResult {
+                total: number;
+            }
+            
             const [countRows] = await connection.execute(countQuery, params);
-            const total = countRows[0].total;
+            const total = (countRows as CountResult[])[0].total;
 
             // 处理分页
             const limit = options.pageSize || 10;
@@ -168,7 +172,7 @@ export async function getOriginalQuestions(options: GetOriginalQuestionsOptions 
             const [rows] = await connection.execute(query, params);
 
             // 转换结果类型
-            const data = rows.map((row: any): OriginalQuestionWithVersion => ({
+            const data = (rows as OriginalQuestionWithVersion[]).map((row: OriginalQuestionWithVersion): OriginalQuestionWithVersion => ({
                 id: row.id,
                 created_at: row.created_at,
                 updated_at: row.updated_at,
