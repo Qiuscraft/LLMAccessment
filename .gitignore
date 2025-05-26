@@ -4,5 +4,14 @@ dist
 .output
 .nuxt
 .vercel
-.env
 .idea
+DBH-PJ说明/原始数据/Schema.png
+DBH-PJ说明/原始数据/Stack Exchange Data Dump Schema.pdf
+DBH-PJ说明/原始数据/StackExchange原始数据/Posts-slice.xml
+DBH-PJ说明/原始数据/StackExchange原始数据/Posts.xml
+DBH-PJ说明/原始数据/StackOverflow原始数据/Posts-answers.xml
+DBH-PJ说明/原始数据/StackOverflow原始数据/Posts-questions.xml
+DBH-PJ说明/示例数据v1/18个原始问答帖.json
+DBH-PJ说明/示例数据v1/45个标准问答对.json
+DBH-PJ说明/示例数据v1/数据说明.md
+DBH-PJ说明/评测方法参考/prompt-裁判大模型.md
