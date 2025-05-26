@@ -31,7 +31,8 @@ export default defineEventHandler(async (event) => {
         // 处理分页和排序参数
         pageSize: query.pageSize ? parseInt(query.pageSize as string) : 10,
         pageNumber: query.pageNumber ? parseInt(query.pageNumber as string) : 1,
-        orderBy: (query.orderBy as 'ASC' | 'DESC') || 'DESC'
+        orderBy: (query.orderBy as 'ASC' | 'DESC') || 'DESC',
+        orderField: query.orderField as 'id' | 'created_at' | 'updated_at' | 'latest_version' | 'version' | 'title' | 'content' | 'version_created_at' || 'id',
       };
 
       // 调用数据库操作函数获取数据
