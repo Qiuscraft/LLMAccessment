@@ -47,6 +47,7 @@ export interface GetOriginalQuestionsOptions {
     pageSize?: number;
     pageNumber?: number;
     orderBy?: 'ASC' | 'DESC';
+    orderField?: 'id' | 'created_at' | 'updated_at' | 'latest_version' | 'version' | 'title' | 'content' | 'version_created_at';
 }
 
 /**
@@ -128,6 +129,7 @@ export async function getOriginalQuestions(options: GetOriginalQuestionsOptions 
 
             // 确定排序方式
             const orderDirection = options.orderBy || 'DESC';
+            const orderField = options.orderField || 'id';
 
             // 计算总记录数
             const countQuery = `
@@ -159,7 +161,7 @@ export async function getOriginalQuestions(options: GetOriginalQuestionsOptions 
                 FROM original_question oq
                 JOIN original_question_version oqv ON oq.id = oqv.oq_id
                 ${whereClause}
-                ORDER BY oq.id ${orderDirection}
+                ORDER BY ${orderField} ${orderDirection}
                 ${paginationClause}
             `;
 
