@@ -17,6 +17,17 @@ export interface OriginalQuestionVersion {
     created_at: Date;
 }
 
+export interface OriginalQuestionWithVersion {
+    id: number;
+    created_at: Date;
+    updated_at: Date;
+    latest_version: string;
+    version: string;
+    title: string | null;
+    content: string;
+    version_created_at: Date;
+}
+
 // 标准问题标签表
 export interface StandardQuestionTag {
     tag: string;
