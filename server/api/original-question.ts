@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
       const query = getQuery(event);
 
       // 导入getOriginalQuestions函数
-      const { getOriginalQuestions } = await import('../database/operations/databaseOperationOriginalQuestion');
+      const { getOriginalQuestions } = await import('../database/databaseOriginalQuestion');
 
       // 构建查询选项
       const options = {
@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
       const body = await readBody(event);
       const { version, title, content } = body;
 
-      const { newOriginalQuestion } = await import('../database/operations/databaseOperationOriginalQuestion');
+      const { newOriginalQuestion } = await import('../database/databaseOriginalQuestion');
       const id = await newOriginalQuestion(version, title, content);
       return { id };
     } catch (error) {
