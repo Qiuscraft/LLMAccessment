@@ -75,6 +75,7 @@ const handleConfirm = async () => {
     content.value = '';
     ElMessage.success('创建成功');
   } catch (error) {
+    console.error(error);
     ElMessage.error(error.message || '创建失败');
   } finally {
     buttonDisabled.value = false;
